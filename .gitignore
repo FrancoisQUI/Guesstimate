@@ -1,0 +1,53 @@
+# =========================
+# Backend (Python / FastAPI)
+# =========================
+# Environments
+.env
+.env.local
+.venv
+env/
+venv/
+ENV/
+
+# Python compiled
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Database
+*.sqlite3
+*.db
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+
+# Logs
+*.log
+
+
+# =========================
+# Frontend (Vue.js / Vite)
+# =========================
+# Dependencies
+node_modules/
+/frontend/node_modules/
+
+# Production build
+/frontend/dist/
+/frontend/dist-ssr/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+
+# =========================
+# General & IDEs
+# =========================
+.DS_Store
+.idea/
+.vscode/
+*.swp
