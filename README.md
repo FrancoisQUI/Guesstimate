@@ -1,4 +1,4 @@
-# Timeline CardGame
+# GuesstimateCardGame
 
 Un jeu de société multijoueur en ligne inspiré du célèbre jeu *Timeline*. Les joueurs doivent placer des cartes (événements historiques, inventions, films, etc.) dans le bon ordre chronologique ou selon d'autres critères numériques (budget, recettes au box-office, etc.).
 
