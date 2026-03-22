@@ -23,6 +23,12 @@ Un jeu de société multijoueur en ligne inspiré du célèbre jeu *Timeline*. L
 *   [Node.js](https://nodejs.org/) (pour Vue.js / Vite)
 *   [Python 3.9+](https://www.python.org/)
 
+### 🛠 Configuration Initiale (.env)
+
+Au premier lancement, la base de données se crée localement de façon automatique. Pour disposer d'un set de cartes pour débuter, le projet s'appuie sur le fichier de configuration `backend/.env`. Vous y trouverez les paramètres :
+*   `ADMIN_PASSWORD` : Le mot de passe servant aux scripts d'import massifs.
+*   `INIT_DB_ON_START=True` : Autorise le serveur à charger en base de données un set de démonstration massif (`init_data.json`) si la base est vide.
+
 ### Lancement Rapide (Windows)
 
 Si vous êtes sous Windows, vous pouvez lancer l'intégralité du projet en double-cliquant simplement sur le script situé à la racine :

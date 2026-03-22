@@ -36,6 +36,42 @@ def validate_admin(x_admin_key: str = Header(None)):
 def verify_admin(is_admin: bool = Depends(validate_admin)):
     return {"status": "ok"}
 
+import json
+from database import SessionLocal
+
+@app.on_event("startup")
+def init_db_on_startup():
+    if os.getenv("INIT_DB_ON_START", "False").lower() == "true":
+        with SessionLocal() as db:
+            if db.query(models.Card).count() == 0:
+                print("Initialisation de la base de données depuis init_data.json...")
+                try:
+                    with open("init_data.json", "r", encoding="utf-8") as f:
+                        cards_data = json.load(f)
+                    for c_data in cards_data:
+                        db_tags = []
+                        for t_name in c_data.get("tags", []):
+                            tag = db.query(models.Tag).filter(models.Tag.name == t_name).first()
+                            if not tag:
+                                tag = models.Tag(name=t_name)
+                                db.add(tag)
+                                db.commit()
+                                db.refresh(tag)
+                            db_tags.append(tag)
+                        
+                        db_card = models.Card(
+                            name=c_data.get("name"),
+                            image_url=c_data.get("image_url"),
+                            wiki_link=c_data.get("wiki_link"),
+                            attributes=c_data.get("attributes", {}),
+                            tags=db_tags
+                        )
+                        db.add(db_card)
+                    db.commit()
+                    print(f"Base de données initialisée avec succès ! ({len(cards_data)} cartes)")
+                except Exception as e:
+                    print(f"Erreur d'initialisation : {e}")
+
 @app.get("/")
 def read_root():
     return {"message": "Welcome to the Timeline CardGame API"}
